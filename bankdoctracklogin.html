@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BankDoc Track Prototype</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        .container {
+            flex: 1;
+            padding: 20px;
+        }
+        input[type="text"], input[type="password"], button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .nav {
+            width: 200px;
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        .nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .nav ul li {
+            margin-bottom: 10px;
+        }
+        .nav ul li a {
+            text-decoration: none;
+            color: #fff;
+        }
+        .bank-account-details {
+            margin-top: 20px;
+        }
+        .reminders {
+            background-color: #fff;
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav">
+        <ul>
+            <li><a href="#" onclick="showBankAccountDetails('bankAccount1')">Bank Account 1</a></li>
+            <li><a href="#" onclick="showBankAccountDetails('bankAccount2')">Bank Account 2</a></li>
+        </ul>
+    </div>
+
+    <div class="container">
+        <h1>Welcome to BankDoc Track</h1>
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Enter username">
+            <input type="password" id="password" placeholder="Enter password">
+            <button type="button" onclick="login()">Login</button>
+        </form>
+
+        <!-- Dashboard Section -->
+        <div id="dashboard" style="display: none;">
+            <h2>User Dashboard</h2>
+            <p>Welcome, <span id="loggedInUser"></span>! <button onclick="logout()">Logout</button></p>
+
+            <div id="bankAccount1" class="bank-account-details">
+                <h3>Bank Account 1 Details</h3>
+                <p>Account Holder: John Doe</p>
+                <p>Balance: ₹1000</p>
+                <p>Policy Details: Lorem ipsum policy details for Bank Account 1</p>
+                <p>Loan Renewal Date: 01-Jan-2023</p>
+            </div>
+
+            <div id="bankAccount2" class="bank-account-details" style="display: none;">
+                <h3>Bank Account 2 Details</h3>
+                <p>Account Holder: Jane Smith</p>
+                <p>Balance: ₹1500</p>
+                <p>Policy Details: Lorem ipsum policy details for Bank Account 2</p>
+                <p>Loan Renewal Date: 15-Feb-2023</p>
+            </div>
+
+            <div class="reminders">
+                <h3>Reminders</h3>
+                <p>Policy Renewal: 10 days left for Bank Account 1</p>
+                <p>Loan Renewal: 1 month left for Bank Account 2</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function login() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            if (username === "user" && password === "password") {
+                alert("Login successful! Redirecting to dashboard...");
+                // Show dashboard and hide login form
+                document.getElementById("dashboard").style.display = "block";
+                document.getElementById("loggedInUser").textContent = username;
+                document.getElementById("loginForm").style.display = "none";
+            } else {
+                alert("Invalid username or password. Please try again.");
+            }
+        }
+
+        function logout() {
+            // Clear user session or perform logout actions
+            alert("Logged out successfully!");
+            document.getElementById("dashboard").style.display = "none";
+            document.getElementById("loginForm").style.display = "block";
+        }
+
+        // Function to show selected bank account details
+        function showBankAccountDetails(accountId) {
+            // Hide all bank account details
+            const bankAccountDetails = document.getElementsByClassName("bank-account-details");
+            for (let i = 0; i < bankAccountDetails.length; i++) {
+                bankAccountDetails[i].style.display = "none";
+            }
+            // Show the selected bank account details
+            document.getElementById(accountId).style.display = "block";
+        }
+    </script>
+</body>
+</html>
